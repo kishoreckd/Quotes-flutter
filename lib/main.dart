@@ -23,7 +23,34 @@ class _QuoteListState extends State<QuoteList> {
     Quote(text: 'We won Sir..', author: 'oscar Issac'),
   ];
 
-  Widget quoteTemplate(Quote quotes) {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.grey[200],
+      appBar: AppBar(
+        title: const Text('Awesome Quotes'),
+        centerTitle: true,
+        backgroundColor: Colors.redAccent,
+      ),
+      body: Column(
+        children: quotes.map((e) => QuoteCard(quotes: e)).toList(),
+    // listcomprehension
+        // children: quotes.map((e) => Text('${e.text} - ${e.author}')).toList(),
+      ),
+    );
+  }
+}
+
+class QuoteCard extends StatelessWidget {
+  const QuoteCard({
+    super.key,
+    required this.quotes,
+  });
+
+  final Quote quotes;
+
+  @override
+  Widget build(BuildContext context) {
     return Card(
         margin: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
         child: Padding(
@@ -45,22 +72,5 @@ class _QuoteListState extends State<QuoteList> {
             ],
           ),
         ));
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[200],
-      appBar: AppBar(
-        title: const Text('Awesome Quotes'),
-        centerTitle: true,
-        backgroundColor: Colors.redAccent,
-      ),
-      body: Column(
-        children: quotes.map((e) => quoteTemplate(e)).toList(),
-// listcomprehension
-        // children: quotes.map((e) => Text('${e.text} - ${e.author}')).toList(),
-      ),
-    );
   }
 }
