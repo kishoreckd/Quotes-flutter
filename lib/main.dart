@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:quotes/quote.dart';
 import 'package:quotes/quote_card.dart';
 
-
 void main() {
   runApp(const MaterialApp(
     home: QuoteList(),
@@ -35,12 +34,18 @@ class _QuoteListState extends State<QuoteList> {
         backgroundColor: Colors.redAccent,
       ),
       body: Column(
-        children: quotes.map((e) => QuoteCard(quotes: e)).toList(),
-    // listcomprehension
+        children: quotes
+            .map((e) => QuoteCard(
+                quotes: e,
+                delete: () {
+                  setState(() {
+                    quotes.remove(e);
+                  });
+                }))
+            .toList(),
+        // listcomprehension
         // children: quotes.map((e) => Text('${e.text} - ${e.author}')).toList(),
       ),
     );
   }
 }
-
-
